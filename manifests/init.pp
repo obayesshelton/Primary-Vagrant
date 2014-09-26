@@ -39,45 +39,6 @@ apache::vhost { 'phpmyadmin.pv':
 	template                 => '/var/vagrant/conf/vhost.conf.erb',
 }
 
-apache::vhost { 'replacedb.pv':
-	docroot                  => '/var/www/replacedb.pv',
-	directory                => '/var/www/replacedb.pv',
-	directory_allow_override => 'All',
-	template                 => '/var/vagrant/conf/vhost.conf.erb',
-}
-
-apache::vhost { 'wordpress.core.pv':
-	docroot                  => '/var/www/wordpress.core.pv/src',
-	directory                => '/var/www/wordpress.core.pv/src',
-	directory_allow_override => 'All',
-	ssl                      => true,
-	template                 => '/var/vagrant/conf/vhost.conf.erb',
-}
-
-apache::vhost { 'wordpress.legacy.pv':
-	docroot                  => '/var/www/wordpress.legacy.pv/htdocs',
-	directory                => '/var/www/wordpress.legacy.pv/htdocs',
-	directory_allow_override => 'All',
-	ssl                      => true,
-	template                 => '/var/vagrant/conf/vhost.conf.erb',
-}
-
-apache::vhost { 'wordpress.stable.pv':
-	docroot                  => '/var/www/wordpress.stable.pv/htdocs',
-	directory                => '/var/www/wordpress.stable.pv/htdocs',
-	directory_allow_override => 'All',
-	ssl                      => true,
-	template                 => '/var/vagrant/conf/vhost.conf.erb',
-}
-
-apache::vhost { 'wordpress.trunk.pv':
-	docroot                  => '/var/www/wordpress.trunk.pv/htdocs',
-	directory                => '/var/www/wordpress.trunk.pv/htdocs',
-	directory_allow_override => 'All',
-	ssl                      => true,
-	template                 => '/var/vagrant/conf/vhost.conf.erb',
-}
-
 apache::vhost { 'webgrind.pv':
 	docroot                  => '/var/www/webgrind.pv',
 	directory                => '/var/www/webgrind.pv',
@@ -196,34 +157,6 @@ class { 'postfix':
 
 class { 'mysql::server':
 	remove_default_accounts => true,
-}
-
-mysql_database { 'wordpress.stable.pv':
-	ensure  => 'present',
-	charset => 'utf8',
-	collate => 'utf8_swedish_ci',
-	require => Class['mysql::server'],
-}
-
-mysql_database { 'wordpress.legacy.pv':
-	ensure  => 'present',
-	charset => 'utf8',
-	collate => 'utf8_swedish_ci',
-	require => Class['mysql::server'],
-}
-
-mysql_database { 'wordpress.trunk.pv':
-	ensure  => 'present',
-	charset => 'utf8',
-	collate => 'utf8_swedish_ci',
-	require => Class['mysql::server'],
-}
-
-mysql_database { 'wordpress.core.pv':
-	ensure  => 'present',
-	charset => 'utf8',
-	collate => 'utf8_swedish_ci',
-	require => Class['mysql::server'],
 }
 
 mysql_user { 'username@localhost':
